@@ -1,0 +1,48 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>image/instructimage/1.png</file>
+        <file>image/instructimage/2.png</file>
+        <file>image/instructimage/3.png</file>
+        <file>image/instructimage/4.png</file>
+        <file>image/instructimage/5.png</file>
+        <file>image/instructimage/6.png</file>
+        <file>image/instructimage/7.png</file>
+        <file>image/instructimage/8.png</file>
+        <file>image/instructimage/9.png</file>
+        <file>image/instructimage/10.png</file>
+        <file>image/instructimage/11.png</file>
+        <file>image/instructimage/12.png</file>
+        <file>image/instructimage/13.png</file>
+        <file>image/instructimage/14.png</file>
+        <file>image/instructimage/15.png</file>
+        <file>image/instructimage/16.png</file>
+        <file>image/instructimage/17.png</file>
+        <file>image/instructimage/18.png</file>
+        <file>image/instructimage/19.png</file>
+        <file>image/instructimage/20.png</file>
+        <file>image/instructimage/21.png</file>
+        <file>image/instructimage/22.png</file>
+        <file>image/instructimage/23.png</file>
+        <file>image/instructimage/24.png</file>
+        <file>image/instructimage/25.png</file>
+        <file>image/icon/iMQ.ico</file>
+        <file>image/examples/example0.jpg</file>
+        <file>image/examples/example1.jpg</file>
+        <file>image/examples/example2.jpg</file>
+        <file>image/examples/example3.jpg</file>
+        <file>image/examples/example4.jpg</file>
+        <file>image/examples/example5.jpg</file>
+        <file>image/examples/example6.jpg</file>
+        <file>image/examples/example7.jpg</file>
+        <file>image/examples/example8.jpg</file>
+        <file>image/examples/example9.jpg</file>
+        <file>image/examples/example10.jpg</file>
+        <file>image/examples/example11.jpg</file>
+        <file>image/examples/example12.jpg</file>
+        <file>image/examples/example13.jpg</file>
+        <file>image/examples/example14.jpg</file>
+    </qresource>
+    <qresource prefix="/text">
+        <file>text/points.txt</file>
+    </qresource>
+</RCC>
