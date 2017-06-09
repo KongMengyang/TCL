@@ -20,6 +20,11 @@
 #include <QVector>
 #include <QTableWidgetItem>
 
+#include <opencv2/opencv.hpp>
+
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -79,10 +84,12 @@ class MainWindow : public QMainWindow
     double distance_pointtoline(QPoint a,QPoint b,QPoint c);
     void showObjData(int x);
     void activePoint(int x);
+    cv::Mat originmat;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 
 
 private:
@@ -100,6 +107,8 @@ private slots:
     void on_tableWidget_itemDoubleClicked(QTableWidgetItem *item);
     void on_displayallButton_clicked();
     void on_displayhaloButton_clicked();
+
+    void on_sharpenPushButton_clicked();
 
 signals:
 };

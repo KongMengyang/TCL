@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[18];
-    char stringdata0[364];
+    QByteArrayData data[19];
+    char stringdata0[393];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,7 +46,8 @@ QT_MOC_LITERAL(13, 251, 32), // "on_tableWidget_itemDoubleClicked"
 QT_MOC_LITERAL(14, 284, 17), // "QTableWidgetItem*"
 QT_MOC_LITERAL(15, 302, 4), // "item"
 QT_MOC_LITERAL(16, 307, 27), // "on_displayallButton_clicked"
-QT_MOC_LITERAL(17, 335, 28) // "on_displayhaloButton_clicked"
+QT_MOC_LITERAL(17, 335, 28), // "on_displayhaloButton_clicked"
+QT_MOC_LITERAL(18, 364, 28) // "on_sharpenPushButton_clicked"
 
     },
     "MainWindow\0on_openPushbutton_clicked\0"
@@ -60,7 +61,8 @@ QT_MOC_LITERAL(17, 335, 28) // "on_displayhaloButton_clicked"
     "on_tableWidget_itemDoubleClicked\0"
     "QTableWidgetItem*\0item\0"
     "on_displayallButton_clicked\0"
-    "on_displayhaloButton_clicked"
+    "on_displayhaloButton_clicked\0"
+    "on_sharpenPushButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -70,7 +72,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -78,18 +80,19 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   74,    2, 0x08 /* Private */,
-       3,    1,   75,    2, 0x08 /* Private */,
-       5,    0,   78,    2, 0x08 /* Private */,
-       6,    1,   79,    2, 0x08 /* Private */,
-       7,    1,   82,    2, 0x08 /* Private */,
-       8,    1,   85,    2, 0x08 /* Private */,
-      10,    0,   88,    2, 0x08 /* Private */,
-      11,    0,   89,    2, 0x08 /* Private */,
-      12,    0,   90,    2, 0x08 /* Private */,
-      13,    1,   91,    2, 0x08 /* Private */,
-      16,    0,   94,    2, 0x08 /* Private */,
-      17,    0,   95,    2, 0x08 /* Private */,
+       1,    0,   79,    2, 0x08 /* Private */,
+       3,    1,   80,    2, 0x08 /* Private */,
+       5,    0,   83,    2, 0x08 /* Private */,
+       6,    1,   84,    2, 0x08 /* Private */,
+       7,    1,   87,    2, 0x08 /* Private */,
+       8,    1,   90,    2, 0x08 /* Private */,
+      10,    0,   93,    2, 0x08 /* Private */,
+      11,    0,   94,    2, 0x08 /* Private */,
+      12,    0,   95,    2, 0x08 /* Private */,
+      13,    1,   96,    2, 0x08 /* Private */,
+      16,    0,   99,    2, 0x08 /* Private */,
+      17,    0,  100,    2, 0x08 /* Private */,
+      18,    0,  101,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -102,6 +105,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 14,   15,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -126,6 +130,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 9: _t->on_tableWidget_itemDoubleClicked((*reinterpret_cast< QTableWidgetItem*(*)>(_a[1]))); break;
         case 10: _t->on_displayallButton_clicked(); break;
         case 11: _t->on_displayhaloButton_clicked(); break;
+        case 12: _t->on_sharpenPushButton_clicked(); break;
         default: ;
         }
     }
@@ -156,13 +161,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

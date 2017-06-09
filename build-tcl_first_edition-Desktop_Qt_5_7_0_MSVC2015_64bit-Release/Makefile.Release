@@ -14,10 +14,10 @@ CXX           = cl
 DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG
 CFLAGS        = -nologo -Zc:wchar_t -FS -Zc:strictStrings -O2 -MD -W3 -w44456 -w44457 -w44458 $(DEFINES)
 CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:strictStrings -Zc:throwingNew -O2 -MD -GR -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -EHsc $(DEFINES)
-INCPATH       = -I..\tcl_first_edition -I. -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtGui -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtANGLE -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtCore -Irelease -I. -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\mkspecs\win32-msvc2015 
+INCPATH       = -I..\tcl_first_edition -I. -ID:\opencv\build\include -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtGui -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtANGLE -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtCore -Irelease -I. -IC:\Qt\Qt5.7.0\5.7\msvc2015_64\mkspecs\win32-msvc2015 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib\qtmain.lib /LIBPATH:C:\utils\postgresql\pgsql\lib /LIBPATH:C:\utils\my_sql\my_sql\lib shell32.lib C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib\Qt5Widgets.lib C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib\Qt5Gui.lib C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib\Qt5Core.lib release\MQicon.res 
+LIBS          = /LIBPATH:C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib\qtmain.lib /LIBPATH:C:\utils\postgresql\pgsql\lib /LIBPATH:C:\utils\my_sql\my_sql\lib shell32.lib /LIBPATH:D:\opencv\build\x64\vc12\lib D:\opencv\build\x64\vc12\lib\opencv_core2413.lib D:\opencv\build\x64\vc12\lib\opencv_imgproc2413.lib D:\opencv\build\x64\vc12\lib\opencv_highgui2413.lib D:\opencv\build\x64\vc12\lib\opencv_ml2413.lib D:\opencv\build\x64\vc12\lib\opencv_video2413.lib D:\opencv\build\x64\vc12\lib\opencv_features2d2413.lib D:\opencv\build\x64\vc12\lib\opencv_calib3d2413.lib D:\opencv\build\x64\vc12\lib\opencv_objdetect2413.lib D:\opencv\build\x64\vc12\lib\opencv_contrib2413.lib D:\opencv\build\x64\vc12\lib\opencv_legacy2413.lib D:\opencv\build\x64\vc12\lib\opencv_flann2413.lib C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib\Qt5Widgets.lib C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib\Qt5Gui.lib C:\Qt\Qt5.7.0\5.7\msvc2015_64\lib\Qt5Core.lib release\MQicon.res 
 QMAKE         = C:\Qt\Qt5.7.0\5.7\msvc2015_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -363,7 +363,7 @@ release\moc_mainwindow.cpp: C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets\QMai
 		C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets\qrubberband.h \
 		..\tcl_first_edition\mainwindow.h \
 		C:\Qt\Qt5.7.0\5.7\msvc2015_64\bin\moc.exe
-	C:\Qt\Qt5.7.0\5.7\msvc2015_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IC:/Users/KinG/Documents/Qtproject/TCL/tcl_first_edition -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtWidgets -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtGui -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtANGLE -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtCore -I. ..\tcl_first_edition\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\Qt\Qt5.7.0\5.7\msvc2015_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IC:/Users/KinG/Documents/Qtproject/TCL/tcl_first_edition -ID:/opencv/build/include -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtWidgets -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtGui -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtANGLE -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtCore -I. ..\tcl_first_edition\mainwindow.h -o release\moc_mainwindow.cpp
 
 release\moc_mylabel.cpp: C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets\QLabel \
 		C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets\qlabel.h \
@@ -475,7 +475,7 @@ release\moc_mylabel.cpp: C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets\QLabel 
 		C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtCore\QDebug \
 		..\tcl_first_edition\mylabel.h \
 		C:\Qt\Qt5.7.0\5.7\msvc2015_64\bin\moc.exe
-	C:\Qt\Qt5.7.0\5.7\msvc2015_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IC:/Users/KinG/Documents/Qtproject/TCL/tcl_first_edition -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtWidgets -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtGui -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtANGLE -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtCore -I. ..\tcl_first_edition\mylabel.h -o release\moc_mylabel.cpp
+	C:\Qt\Qt5.7.0\5.7\msvc2015_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IC:/Users/KinG/Documents/Qtproject/TCL/tcl_first_edition -ID:/opencv/build/include -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtWidgets -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtGui -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtANGLE -IC:/Qt/Qt5.7.0/5.7/msvc2015_64/include/QtCore -I. ..\tcl_first_edition\mylabel.h -o release\moc_mylabel.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -934,7 +934,57 @@ release\mainwindow.obj: ..\tcl_first_edition\mainwindow.cpp ../tcl_first_edition
 		C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets\QWidget \
 		../tcl_first_edition/mylabel.h \
 		C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtCore\QPoint \
-		C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtCore\QDebug
+		C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtCore\QDebug \
+		D:\opencv\build\include\opencv\cv.h \
+		D:\opencv\build\include\opencv2\core\core_c.h \
+		D:\opencv\build\include\opencv2\core\types_c.h \
+		D:\opencv\build\include\opencv2\core\core.hpp \
+		D:\opencv\build\include\opencv2\core\version.hpp \
+		D:\opencv\build\include\opencv2\core\operations.hpp \
+		D:\opencv\build\include\opencv2\core\mat.hpp \
+		D:\opencv\build\include\opencv2\imgproc\imgproc_c.h \
+		D:\opencv\build\include\opencv2\imgproc\types_c.h \
+		D:\opencv\build\include\opencv2\imgproc\imgproc.hpp \
+		D:\opencv\build\include\opencv2\video\tracking.hpp \
+		D:\opencv\build\include\opencv2\features2d\features2d.hpp \
+		D:\opencv\build\include\opencv2\flann\miniflann.hpp \
+		D:\opencv\build\include\opencv2\flann\defines.h \
+		D:\opencv\build\include\opencv2\flann\config.h \
+		D:\opencv\build\include\opencv2\flann\flann.hpp \
+		D:\opencv\build\include\opencv2\flann\flann_base.hpp \
+		D:\opencv\build\include\opencv2\flann\general.h \
+		D:\opencv\build\include\opencv2\flann\matrix.h \
+		D:\opencv\build\include\opencv2\flann\params.h \
+		D:\opencv\build\include\opencv2\flann\any.h \
+		D:\opencv\build\include\opencv2\flann\saving.h \
+		D:\opencv\build\include\opencv2\flann\nn_index.h \
+		D:\opencv\build\include\opencv2\flann\result_set.h \
+		D:\opencv\build\include\opencv2\flann\all_indices.h \
+		D:\opencv\build\include\opencv2\flann\kdtree_index.h \
+		D:\opencv\build\include\opencv2\flann\dynamic_bitset.h \
+		D:\opencv\build\include\opencv2\flann\dist.h \
+		D:\opencv\build\include\opencv2\flann\heap.h \
+		D:\opencv\build\include\opencv2\flann\allocator.h \
+		D:\opencv\build\include\opencv2\flann\random.h \
+		D:\opencv\build\include\opencv2\flann\kdtree_single_index.h \
+		D:\opencv\build\include\opencv2\flann\kmeans_index.h \
+		D:\opencv\build\include\opencv2\flann\logger.h \
+		D:\opencv\build\include\opencv2\flann\composite_index.h \
+		D:\opencv\build\include\opencv2\flann\linear_index.h \
+		D:\opencv\build\include\opencv2\flann\hierarchical_clustering_index.h \
+		D:\opencv\build\include\opencv2\flann\lsh_index.h \
+		D:\opencv\build\include\opencv2\flann\lsh_table.h \
+		D:\opencv\build\include\opencv2\flann\autotuned_index.h \
+		D:\opencv\build\include\opencv2\flann\ground_truth.h \
+		D:\opencv\build\include\opencv2\flann\index_testing.h \
+		D:\opencv\build\include\opencv2\flann\timer.h \
+		D:\opencv\build\include\opencv2\flann\sampling.h \
+		D:\opencv\build\include\opencv2\calib3d\calib3d.hpp \
+		D:\opencv\build\include\opencv2\core\affine.hpp \
+		D:\opencv\build\include\opencv2\objdetect\objdetect.hpp \
+		D:\opencv\build\include\opencv2\legacy\compat.hpp \
+		D:\opencv\build\include\opencv2\core\internal.hpp \
+		D:\opencv\build\include\opencv2\core\eigen.hpp
 
 release\mylabel.obj: ..\tcl_first_edition\mylabel.cpp ../tcl_first_edition/mylabel.h \
 		C:\Qt\Qt5.7.0\5.7\msvc2015_64\include\QtWidgets\QLabel \

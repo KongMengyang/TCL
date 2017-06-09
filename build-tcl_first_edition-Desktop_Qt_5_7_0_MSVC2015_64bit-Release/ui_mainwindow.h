@@ -63,10 +63,12 @@ public:
     QPushButton *openPushbutton;
     QPushButton *measurePushbutton;
     QPushButton *clearPushbutton;
+    QPushButton *sharpenPushButton;
     QVBoxLayout *verticalLayout;
     QPushButton *displayhaloButton;
     QPushButton *line_displayButton;
     QPushButton *displayallButton;
+    QPushButton *pushButton_2;
     QWidget *widget;
     QHBoxLayout *horizontalLayout_7;
     QSpacerItem *horizontalSpacer_4;
@@ -253,6 +255,11 @@ public:
 
         verticalLayout_6->addWidget(clearPushbutton);
 
+        sharpenPushButton = new QPushButton(scrollAreaWidgetContents_2);
+        sharpenPushButton->setObjectName(QStringLiteral("sharpenPushButton"));
+
+        verticalLayout_6->addWidget(sharpenPushButton);
+
 
         horizontalLayout_2->addLayout(verticalLayout_6);
 
@@ -273,6 +280,11 @@ public:
         displayallButton->setObjectName(QStringLiteral("displayallButton"));
 
         verticalLayout->addWidget(displayallButton);
+
+        pushButton_2 = new QPushButton(scrollAreaWidgetContents_2);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+
+        verticalLayout->addWidget(pushButton_2);
 
 
         horizontalLayout_2->addLayout(verticalLayout);
@@ -605,9 +617,11 @@ public:
         openPushbutton->setText(QApplication::translate("MainWindow", "\345\257\274\345\205\245", 0));
         measurePushbutton->setText(QApplication::translate("MainWindow", "\346\265\213\351\207\217", 0));
         clearPushbutton->setText(QApplication::translate("MainWindow", "\346\270\205\347\251\272", 0));
+        sharpenPushButton->setText(QApplication::translate("MainWindow", "\351\224\220\345\214\226", 0));
         displayhaloButton->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\347\216\257", 0));
         line_displayButton->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\347\272\277", 0));
         displayallButton->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\345\205\250\351\203\250", 0));
+        pushButton_2->setText(QApplication::translate("MainWindow", "\346\232\202\345\256\232", 0));
         instructimgLabel->setText(QString());
         instructLabel->setText(QApplication::translate("MainWindow", "\347\202\271", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);

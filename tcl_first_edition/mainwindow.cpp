@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include <opencv2/opencv.hpp>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -64,6 +65,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+
 void MainWindow::on_openPushbutton_clicked()
 {
     QString filename;
@@ -72,6 +75,8 @@ void MainWindow::on_openPushbutton_clicked()
     {
         if(originimage.load(filename))//读取图像
         {
+            //originmat.imread(filename);
+            qDebug()<<filename;
             initialWidth=originimage.width();
             initialHeight=originimage.height();
             currentWidth=initialWidth;
@@ -80,7 +85,7 @@ void MainWindow::on_openPushbutton_clicked()
             ui->imageLabel->setFixedSize(QSize(initialWidth,initialHeight));
             currentimage=originimage;
 
-            qDebug()<<initialWidth<<" "<<initialHeight;
+
             ui->imageLabel->setPixmap(QPixmap::fromImage(currentimage));
 
             ui->zoomSlider->setValue(100);
@@ -551,455 +556,6 @@ void MainWindow::updateSlot()
         showObjData(i);
 
     }
-    /*if(pointSettled[2]&&pointSettled[3]&&pointSettled[4])//SNA角
-    {
-        double result=angle_3points(orginpoints[2],orginpoints[3],orginpoints[4]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        int row=0;
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        double min=78.8;
-        double max=86.8;
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[2]&&pointSettled[3]&&pointSettled[5])//SNB
-    {
-        double result=angle_3points(orginpoints[2],orginpoints[3],orginpoints[5]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(1,2,newitem);
-        double min=76.2;
-        double max=84.0;
-        if(result<min)
-        {
-            ui->tableWidget->setItem(1,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(1,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(1,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(1,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(1,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(1,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(1,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(1,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[4]&&pointSettled[3]&&pointSettled[5])//ANB
-    {
-        double result=angle_3points(orginpoints[4],orginpoints[3],orginpoints[5]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(2,2,newitem);
-        double min=0.7;
-        double max=4.7;
-        if(result<min)
-        {
-            ui->tableWidget->setItem(2,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(2,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(2,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(2,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(2,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(2,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(2,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(2,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[3]&&pointSettled[8]&&pointSettled[6]&&pointSettled[7])//NP-FH面角
-    {
-        double result=angle_2lines(orginpoints[3],orginpoints[8],orginpoints[6],orginpoints[7]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        int row=3;
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        double min=81.7;
-        double max=89.1;
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[3]&&pointSettled[4]&&pointSettled[8])//NP-PA颌凸角
-    {
-        int row=6;
-        double min=1.6;
-        double max=10.4;
-        double result=angle_2lines(orginpoints[3],orginpoints[4],orginpoints[8],orginpoints[4]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[2]&&pointSettled[9]&&pointSettled[6]&&pointSettled[7])//Y轴角
-    {
-        int row=4;
-        double min=59.2;
-        double max=73.4;
-        double result=angle_2lines(orginpoints[2],orginpoints[9],orginpoints[7],orginpoints[6]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[10]&&pointSettled[11]&&pointSettled[6]&&pointSettled[7])//MP-FH下颌平面角
-    {
-        int row=5;
-        double min=25.5;
-        double max=36.7;
-        double result=angle_2lines(orginpoints[11],orginpoints[10],orginpoints[7],orginpoints[6]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[3]&&pointSettled[4]&&pointSettled[12])//上1-NA距
-    {
-        int row=8;
-        double min=2.7;
-        double max=7.5;
-        double result=distance_pointtoline(orginpoints[12],orginpoints[3],orginpoints[4]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="mm";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[3]&&pointSettled[3]&&pointSettled[12]&&pointSettled[13])//上1-SN角
-    {
-        int row=7;
-        double min=99.4;
-        double max=112.0;
-        double result=angle_2lines(orginpoints[12],orginpoints[13],orginpoints[3],orginpoints[2]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[3]&&pointSettled[4]&&pointSettled[12]&&pointSettled[13])//上1-NA角
-    {
-        int row=9;
-        double min=17.1;
-        double max=28.5;
-        double result=angle_2lines(orginpoints[12],orginpoints[13],orginpoints[3],orginpoints[4]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[3]&&pointSettled[5]&&pointSettled[14])//下1-NB距
-    {
-        int row=11;
-        double min=4.6;
-        double max=8.8;
-        double result=distance_pointtoline(orginpoints[14],orginpoints[3],orginpoints[5]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="mm";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[10]&&pointSettled[11]&&pointSettled[14]&&pointSettled[15])//下1-MP角：
-    {
-        int row=10;
-        double min=87.7;
-        double max=100.1;
-        double result=angle_2lines(orginpoints[14],orginpoints[15],orginpoints[10],orginpoints[11]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[3]&&pointSettled[5]&&pointSettled[14]&&pointSettled[15])//下1-NB角：
-    {
-        int row=12;
-        double min=24.5;
-        double max=36.1;
-        double result=angle_2lines(orginpoints[14],orginpoints[15],orginpoints[5],orginpoints[3]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[12]&&pointSettled[13]&&pointSettled[14]&&pointSettled[15])//上1-下1角：
-    {
-        int row=13;
-        double min=116.0;
-        double max=132.4;
-        double result=angle_2lines(orginpoints[14],orginpoints[15],orginpoints[13],orginpoints[12]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-    if(pointSettled[16]&&pointSettled[17]&&pointSettled[18])//NLA角
-    {
-        int row=14;
-        double min=80;
-        double max=110;
-        double result=angle_3points(orginpoints[16],orginpoints[17],orginpoints[18]);
-        QString strResult=QString::number(result, 10, 1);
-        strResult+="°";
-        QTableWidgetItem *newitem=new QTableWidgetItem(strResult);
-        newitem->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(row,2,newitem);
-        if(result<min)
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏低"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(0, 0, 255));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else if(result>max)
-        {
-
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("偏高"));
-            ui->tableWidget->item(row,3)->setTextColor(QColor(255, 0, 0));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-        else
-        {
-            ui->tableWidget->setItem(row,3,new QTableWidgetItem("正常"));
-            ui->tableWidget->item(row,3)->setTextAlignment(Qt::AlignCenter);
-        }
-    }
-*/
 
 
 }
@@ -1148,4 +704,34 @@ void MainWindow::on_displayhaloButton_clicked()
         ui->imageLabel->displayhalo=true;
     }
     ui->imageLabel->update();
+}
+
+//Mat->QImage
+static QImage ConvertToQImage(cv::Mat &mat)
+{
+    QImage img;
+    int nChannel=mat.channels();
+    if(nChannel==3)
+    {
+        cv::cvtColor(mat,mat,CV_BGR2RGB);
+        img = QImage((const unsigned char*)mat.data,mat.cols,mat.rows,QImage::Format_RGB888);
+    }
+    else if(nChannel==4||nChannel==1)
+    {
+        img = QImage((const unsigned char*)mat.data,mat.cols,mat.rows,QImage::Format_ARGB32);
+    }
+
+    return img;
+}
+
+/*QImage sharpen()
+{
+    //cv::Mat mat=cv::imread();
+}*/
+
+
+
+void MainWindow::on_sharpenPushButton_clicked()
+{
+    originimage=ConvertToQImage(originmat);
 }

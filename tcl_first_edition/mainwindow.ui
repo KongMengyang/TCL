@@ -288,6 +288,13 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="sharpenPushButton">
+              <property name="text">
+               <string>锐化</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -310,6 +317,13 @@
              <widget class="QPushButton" name="displayallButton">
               <property name="text">
                <string>显示全部</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="text">
+               <string>暂定</string>
               </property>
              </widget>
             </item>
