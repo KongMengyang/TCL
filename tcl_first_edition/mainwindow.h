@@ -85,6 +85,8 @@ class MainWindow : public QMainWindow
     void showObjData(int x);
     void activePoint(int x);
     cv::Mat originmat;
+    bool flag_sharpened=false;
+    QImage originimage_backup;
 
 public:
     explicit MainWindow(QWidget *parent = 0);

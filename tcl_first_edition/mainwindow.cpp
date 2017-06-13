@@ -75,6 +75,9 @@ void MainWindow::on_openPushbutton_clicked()
     {
         if(originimage.load(filename))//读取图像
         {
+            originimage_backup=originimage;
+            string str=filename.toStdString();
+            originmat=cv::imread(str);
             //originmat.imread(filename);
             qDebug()<<filename;
             initialWidth=originimage.width();
@@ -707,31 +710,73 @@ void MainWindow::on_displayhaloButton_clicked()
 }
 
 //Mat->QImage
-static QImage ConvertToQImage(cv::Mat &mat)
+QImage MatToQImage(const cv::Mat& mat)
 {
-    QImage img;
-    int nChannel=mat.channels();
-    if(nChannel==3)
+    // 8-bits unsigned, NO. OF CHANNELS = 1
+    if(mat.type() == CV_8UC1)
     {
-        cv::cvtColor(mat,mat,CV_BGR2RGB);
-        img = QImage((const unsigned char*)mat.data,mat.cols,mat.rows,QImage::Format_RGB888);
+        QImage image(mat.cols, mat.rows, QImage::Format_Indexed8);
+        // Set the color table (used to translate colour indexes to qRgb values)
+        image.setColorCount(256);
+        for(int i = 0; i < 256; i++)
+        {
+            image.setColor(i, qRgb(i, i, i));
+        }
+        // Copy input Mat
+        uchar *pSrc = mat.data;
+        for(int row = 0; row < mat.rows; row ++)
+        {
+            uchar *pDest = image.scanLine(row);
+            memcpy(pDest, pSrc, mat.cols);
+            pSrc += mat.step;
+        }
+        return image;
     }
-    else if(nChannel==4||nChannel==1)
+    // 8-bits unsigned, NO. OF CHANNELS = 3
+    else if(mat.type() == CV_8UC3)
     {
-        img = QImage((const unsigned char*)mat.data,mat.cols,mat.rows,QImage::Format_ARGB32);
+        // Copy input Mat
+        const uchar *pSrc = (const uchar*)mat.data;
+        // Create QImage with same dimensions as input Mat
+        QImage image(pSrc, mat.cols, mat.rows, mat.step, QImage::Format_RGB888);
+        return image.rgbSwapped();
     }
-
-    return img;
+    else if(mat.type() == CV_8UC4)
+    {
+        qDebug() << "CV_8UC4";
+        // Copy input Mat
+        const uchar *pSrc = (const uchar*)mat.data;
+        // Create QImage with same dimensions as input Mat
+        QImage image(pSrc, mat.cols, mat.rows, mat.step, QImage::Format_ARGB32);
+        return image.copy();
+    }
+    else
+    {
+        qDebug() << "ERROR: Mat could not be converted to QImage.";
+        return QImage();
+    }
 }
 
-/*QImage sharpen()
-{
-    //cv::Mat mat=cv::imread();
-}*/
 
 
 
 void MainWindow::on_sharpenPushButton_clicked()
 {
-    originimage=ConvertToQImage(originmat);
+    if(flag_sharpened==false){
+        cv::Mat sharpenedMat;
+        cv::Mat kernel(3,3,CV_32F,cv::Scalar(-1));
+        kernel.at<float>(1,1) = 8.9;
+        cv::filter2D(originmat, sharpenedMat, originmat.depth(), kernel);
+        originimage=MatToQImage(sharpenedMat);
+        flag_sharpened=true;
+    }
+    else
+    {
+        originimage=originimage_backup;
+        flag_sharpened=false;
+    }
+
+    int x=ui->zoomSlider->value();
+    ui->zoomSlider->setValue(20);
+    ui->zoomSlider->setValue(x);
 }
