@@ -763,11 +763,32 @@ QImage MatToQImage(const cv::Mat& mat)
 void MainWindow::on_sharpenPushButton_clicked()
 {
     if(flag_sharpened==false){
+
+        /*
+        //方法1
         cv::Mat sharpenedMat;
         cv::Mat kernel(3,3,CV_32F,cv::Scalar(-1));
         kernel.at<float>(1,1) = 8.9;
-        cv::filter2D(originmat, sharpenedMat, originmat.depth(), kernel);
-        originimage=MatToQImage(sharpenedMat);
+        cv::filter2D(originmat, sharpenedMat, originmat.depth(), kernel);*/
+
+
+        //方法2
+        cv::Mat imgSrc=originmat;
+        cv::Mat imgBlurred;
+        cv::Mat imgDst;
+        cv::Mat lowContrastMask;
+
+        double sigma = 3;
+        int threshold = 0;
+        float amount = 1;
+
+        cv::GaussianBlur(imgSrc, imgBlurred, cv::Size(), sigma, sigma);
+        lowContrastMask = abs(imgSrc-imgBlurred)<threshold;
+        imgDst = imgSrc*(1+amount)+imgBlurred*(-amount);
+        imgSrc.copyTo(imgDst, lowContrastMask);
+
+
+        originimage=MatToQImage(imgDst);
         flag_sharpened=true;
     }
     else
