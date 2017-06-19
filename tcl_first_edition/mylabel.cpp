@@ -127,7 +127,7 @@ void myLabel::paintEvent(QPaintEvent* event)
     if(displayall==true){
         //画点
         pen.setColor(Qt::green);
-        pen.setWidth(3);
+        pen.setWidth(5);
         painter.setPen(pen);
         for(int i=0;i<24;i++)
         {
@@ -166,7 +166,7 @@ void myLabel::paintEvent(QPaintEvent* event)
     {
         //画点
        /**/ pen.setColor(Qt::green);
-        pen.setWidth(3);
+        pen.setWidth(5);
         painter.setPen(pen);
         for(int i=0;i<24;i++)
         {

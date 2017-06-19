@@ -797,7 +797,8 @@ void MainWindow::on_sharpenPushButton_clicked()
         flag_sharpened=false;
     }
 
-    int x=ui->zoomSlider->value();
-    ui->zoomSlider->setValue(20);
-    ui->zoomSlider->setValue(x);
+    int zoomValue=ui->zoomSlider->value();
+    ui->zoomSlider->setValue(23);
+    ui->zoomSlider->setValue(zoomValue);
+
 }
