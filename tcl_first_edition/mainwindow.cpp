@@ -65,7 +65,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+string qstr2str(const QString qstr)
+{
+    QByteArray cdata = qstr.toLocal8Bit();
+    return string(cdata);
+}
 
 void MainWindow::on_openPushbutton_clicked()
 {
@@ -76,9 +80,10 @@ void MainWindow::on_openPushbutton_clicked()
         if(originimage.load(filename))//读取图像
         {
             originimage_backup=originimage;
-            string str=filename.toStdString();
+            string str=qstr2str(filename);
             originmat=cv::imread(str);
-            //originmat.imread(filename);
+            //QImageToMat();
+            cout<<str<<endl;
             qDebug()<<filename;
             initialWidth=originimage.width();
             initialHeight=originimage.height();
@@ -756,6 +761,27 @@ QImage MatToQImage(const cv::Mat& mat)
         return QImage();
     }
 }
+void MainWindow::QImageToMat()
+{
+    cv::Mat mat;
+    QImage image=originimage;
+    switch (image.format())
+    {
+    case QImage::Format_ARGB32:
+    case QImage::Format_RGB32:
+    case QImage::Format_ARGB32_Premultiplied:
+        mat = cv::Mat(image.height(), image.width(), CV_8UC4, (void*)image.constBits(), image.bytesPerLine());
+        break;
+    case QImage::Format_RGB888:
+        mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
+        cv::cvtColor(mat, mat, CV_BGR2RGB);
+        break;
+    case QImage::Format_Indexed8:
+        mat = cv::Mat(image.height(), image.width(), CV_8UC1, (void*)image.constBits(), image.bytesPerLine());
+        break;
+    }
+    originmat=mat;
+}
 
 
 
@@ -777,7 +803,6 @@ void MainWindow::on_sharpenPushButton_clicked()
         cv::Mat imgBlurred;
         cv::Mat imgDst;
         cv::Mat lowContrastMask;
-
         double sigma = 3;
         int threshold = 0;
         float amount = 1;
@@ -786,6 +811,7 @@ void MainWindow::on_sharpenPushButton_clicked()
         lowContrastMask = abs(imgSrc-imgBlurred)<threshold;
         imgDst = imgSrc*(1+amount)+imgBlurred*(-amount);
         imgSrc.copyTo(imgDst, lowContrastMask);
+        qDebug()<<"111";
 
 
         originimage=MatToQImage(imgDst);

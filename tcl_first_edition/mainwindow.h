@@ -87,10 +87,11 @@ class MainWindow : public QMainWindow
     cv::Mat originmat;
     bool flag_sharpened=false;
     QImage originimage_backup;
-
+    void QImageToMat();
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 
 
 
