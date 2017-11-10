@@ -14,12 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    mylabel.cpp
+    mylabel.cpp \
+    logindlg.cpp
 
 HEADERS  += mainwindow.h \
-    mylabel.h
+    mylabel.h \
+    logindlg.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    logindlg.ui
 
 RESOURCES += \
     res.qrc

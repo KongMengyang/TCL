@@ -79,8 +79,8 @@ public:
     QLabel *instructLabel;
     QSpacerItem *horizontalSpacer_7;
     QWidget *widget_3;
-    QTableWidget *tableWidget;
     QSpacerItem *verticalSpacer_3;
+    QTableWidget *tableWidget;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -350,6 +350,10 @@ public:
 
         verticalLayout_3->addWidget(widget_3);
 
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer_3);
+
         tableWidget = new QTableWidget(scrollAreaWidgetContents_2);
         if (tableWidget->columnCount() < 4)
             tableWidget->setColumnCount(4);
@@ -588,10 +592,6 @@ public:
         tableWidget->verticalHeader()->setVisible(false);
 
         verticalLayout_3->addWidget(tableWidget);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer_3);
 
         scrollArea_2->setWidget(scrollAreaWidgetContents_2);
 

@@ -39,10 +39,10 @@ public:
     int points[4];
     tclObj(void)
     {
-        max=0;
+        /*max=0;
         min=0;
         type=0;
-        points[4]={-1};
+        points[4]={-1};*/
     }
 
     tclObj(double a,double b,int c,int p0,int p1,int p2,int p3)
